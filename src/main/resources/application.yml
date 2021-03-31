@@ -1,0 +1,16 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    password: "Nikitadeniz99"
+    enabled: true
+    url: "jdbc:mysql://localhost:3306/codejavadb?serverTimezone=UTC"
+    username: "root"
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+
+

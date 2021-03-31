@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeLeaf.org">
+<head>
+
+    <meta charset="ISO-8859-1">
+    <title>All Users - CodeJava</title>
+    <link rel="stylesheet" type="text/css" href="../bootstrap.min.css">
+
+    <script type="text/javascript"
+            src=" ${pageContent.request.contextPath} /js/jquery-1.10.2.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#checkBoxAll').click(function () {
+                if ($(this).is(":checked"))
+                    $('.chkCheckBoxId').prop('checked', true);
+                else
+                    $('.chkCheckBoxId').prop('checked', false);
+            });
+        });
+    </script>
+
+</head>
+
+<body>
+<div class="container text-center">
+    <div>
+        <form th:action="@{/logout}" method="post">
+            <p>
+                Welcom <b> [[${#request.userPrincipal.principal.fullName}]]</b>
+            </p>
+            <input type="submit" value="Sign Out"/>
+        </form>
+    </div>
+    <h1>Welcom to CodeJava.net</h1>
+</div>
+<div class="container text-center">
+    <h1>List of All Users</h1>
+</div>
+<div>
+
+    <form  th:action="@{|/delete/${user.id}|}" th:method="delete" th:object="${user}">
+
+        <input type="submit" class="btn btn-primary" style="color:khaki" value="Delete"
+               onclick="return confirm('Are you sure?')"/>
+        <input type="submit" class="btn btn-primary" style="color:khaki" value="Block"
+               onclick="return confirm('Are you sure?')"/>
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark">
+            <tr>
+                <th><input type="checkbox" id="checkBoxAll"/></th>
+                <th>User Id</th>
+                <th>E-mail</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr  th:each="user: ${listUsers}">
+
+                <td><input type="checkbox" class="chkCheckBoxId"
+                          th:value="${user.id}" th:name="userId"/></td>
+                <td th:text="${user.id}">User ID</td>
+                <td th:text="${user.email}">E-mail</td>
+                <td th:text="${user.firstName}">First Name</td>
+                <td th:text="${user.lastName}">Last Name</td>
+            </tr>
+            </tbody>
+
+        </table>
+    </form>
+</div>
+
+</body>
+
+</html>
