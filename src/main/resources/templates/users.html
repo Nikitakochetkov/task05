@@ -4,13 +4,19 @@
 
     <meta charset="ISO-8859-1">
     <title>All Users - CodeJava</title>
-    <link rel="stylesheet" type="text/css" href="../bootstrap.min.css">
+    <script src="../bootstrap.min.js"></script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../bootstrap.min.css">
+    <link rel="script" href="../bootstrap.min.js">
 
     <script type="text/javascript">
         $(document).ready(function () {
             $("#form1 #checkBoxAll").click(function () {
+                var li = document.getElementsByClassName("chefdg").checkBoxAll.checked;
+                var slides = document.getElementsByClassName("chkCheckBoxId");
+                for (var i = 0; i < slides.length; i++) {
+                    slides.item(i).checked = li;
+                }
                 $("#form1 input[type = 'checkbox']").pop('checked', this.checked);
             });
         });
@@ -44,7 +50,7 @@
             <table class="table table-striped table-bordered">
                 <thead class="thead-dark">
                 <tr>
-                    <th><input type="checkbox" id="checkBoxAll"/></th>
+                    <th><input type="checkbox" class="chefdg" id="checkBoxAll"/></th>
                     <th>User Id</th>
                     <th>E-mail</th>
                     <th>First Name</th>

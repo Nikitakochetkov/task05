@@ -54,21 +54,21 @@ public class AppController {
     }
 
 
-    @PostMapping(value = "/urlToCall")
-    public String delete(HttpServletRequest request, ModelMap map) {
+    @PostMapping(value = "/delete/{someID}")
+    public String delete(@PathVariable(value="someID") String id, HttpServletRequest request, ModelMap map) {
         try {
             System.out.println("gtht");
 //            if (request.getParameterValues("userId") != null) {
 //                for (String userId : request.getParameterValues("userId")) ;
-////                repo.delete(repo.findById());
+                repo.deleteById((long) Integer.parseInt(id));
 //            }
-            return "redirect:users.html";
+//            return ":users.html";
         } catch (Exception e) {
             map.put("eror", e.getMessage());
             map.put("listUsers", repo.findAll());
         }
         System.out.println("gtht");
-        return "users";
+        return "redirect:/list_users";
     }
 
 
