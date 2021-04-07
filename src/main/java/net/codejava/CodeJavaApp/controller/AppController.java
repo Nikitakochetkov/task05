@@ -60,7 +60,7 @@ public class AppController {
         try {
             Optional<User> optionalUser = repo.findById(id);
             User user = optionalUser.isPresent() ? optionalUser.get() : new User();
-            user.setStatus(Status.INBLOCK);
+            user.setStatus(Status.UNBLOCK);
             repo.save(user);
         } catch (Exception e) {
             map.put("error", e.getMessage());

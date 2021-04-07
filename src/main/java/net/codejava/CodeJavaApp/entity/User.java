@@ -24,7 +24,7 @@ public class User {
     private String lastName;
 
     @Column
-    private Status status = Status.INBLOCK;
+    private Status status = Status.UNBLOCK;
 
     @Column
     private Date actualDate;

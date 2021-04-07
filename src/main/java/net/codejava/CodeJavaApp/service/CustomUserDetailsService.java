@@ -30,7 +30,7 @@ public class CustomUserDetailsService implements UserDetailsService {
                 User user = optionalUser.isPresent() ? optionalUser.get() : new User();
                 if (user.getStatus() == Status.BLOCK)
                     return false;
-                else if (user.getStatus() == Status.INBLOCK) {
+                else if (user.getStatus() == Status.UNBLOCK) {
                     return true;
                 }
                 return super.isAccountNonLocked();
