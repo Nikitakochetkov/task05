@@ -1,6 +1,5 @@
 package net.codejava.CodeJavaApp.entity;
 
-import net.codejava.CodeJavaApp.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

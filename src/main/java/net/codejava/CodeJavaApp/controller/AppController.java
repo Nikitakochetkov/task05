@@ -1,25 +1,26 @@
 package net.codejava.CodeJavaApp.controller;
 
+import net.codejava.CodeJavaApp.entity.Status;
 import net.codejava.CodeJavaApp.entity.User;
 import net.codejava.CodeJavaApp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class AppController {
 
     @Autowired
     private UserRepository repo;
+
+    private User user;
 
     @GetMapping
     public String viewPage() {
@@ -47,37 +48,50 @@ public class AppController {
     public String viewUsersList(Model model) {
         List<User> listUsers = repo.findAll();
         model.addAttribute("listUsers", listUsers);
-        model.addAttribute("user", listUsers.get(0));
+//        model.addAttribute("user", listUsers.get(0));
         model.addAttribute("users", listUsers);
 
         return "users";
     }
 
 
-    @PostMapping(value = "/delete/{someID}")
-    public String delete(@PathVariable(value="someID") String id, HttpServletRequest request, ModelMap map) {
+    @PostMapping(value = "/unblock/{someID}")//NIKITA PIDOR
+    public String inBlock(@PathVariable(value = "someID") Long id, ModelMap map) {
         try {
-            System.out.println("gtht");
-//            if (request.getParameterValues("userId") != null) {
-//                for (String userId : request.getParameterValues("userId")) ;
-                repo.deleteById((long) Integer.parseInt(id));
-//            }
-//            return ":users.html";
+            Optional<User> optionalUser = repo.findById(id);
+            User user = optionalUser.isPresent() ? optionalUser.get() : new User();
+            user.setStatus(Status.INBLOCK);
+            repo.save(user);
         } catch (Exception e) {
-            map.put("eror", e.getMessage());
-            map.put("listUsers", repo.findAll());
+            map.put("error", e.getMessage());
         }
-        System.out.println("gtht");
+        return "redirect:/list_users";
+    }
+
+    @PostMapping(value = "/block/{someID}")
+    public String block(@PathVariable(value = "someID") Long id , ModelMap map) {
+        try {
+            //todo get user from repo by id
+            Optional<User> optionalUser = repo.findById(id);
+            User user = optionalUser.isPresent() ? optionalUser.get() : new User();
+            user.setStatus(Status.BLOCK);
+            repo.save(user);
+        } catch (Exception e) {
+            map.put("error", e.getMessage());
+        }
         return "redirect:/list_users";
     }
 
 
-//    @PostMapping("/delete/{userId}")
-//    public String deleteUser(@PathVariable("userId") long id, Model model) {
-//        User user = repo.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
-//        repo.delete(user);
-//
-//        return "redirect:/users";
-//    }
+    @PostMapping(value = "/delete/{someID}")
+    public String delete(@PathVariable(value = "someID") String id, HttpServletRequest request, ModelMap map) {
+        try {
+            repo.deleteById((long) Integer.parseInt(id));
+        } catch (Exception e) {
+            map.put("eror", e.getMessage());
+            map.put("listUsers", repo.findAll());
+        }
+        return "redirect:/list_users";
+    }
 }
 

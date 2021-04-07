@@ -1,6 +1,7 @@
 package net.codejava.CodeJavaApp.entity;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "users")
@@ -10,17 +11,26 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false , unique = true , length = 45)
+    @Column(nullable = false, unique = true, length = 45)
     private String email;
 
-    @Column(nullable = false , length = 64)
+    @Column(nullable = false, length = 64)
     private String password;
 
-    @Column(nullable = false , length = 20)
+    @Column(nullable = false, length = 20)
     private String firstName;
 
-    @Column(nullable = false , length = 20)
+    @Column(nullable = false, length = 20)
     private String lastName;
+
+    @Column
+    private Status status = Status.INBLOCK;
+
+    @Column
+    private Date actualDate;
+
+    @Column
+    private Date singUpDate;
 
     public Long getId() {
         return id;
@@ -60,5 +70,29 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Date getSingUpDate() {
+        return singUpDate;
+    }
+
+    public void setSingUpDate(Date singUpDate) {
+        this.singUpDate = singUpDate;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public Date getActualDate() {
+        return actualDate;
+    }
+
+    public void setActualDate(Date actualDate) {
+        this.actualDate = actualDate;
     }
 }
