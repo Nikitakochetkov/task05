@@ -20,8 +20,6 @@ public class AppController {
     @Autowired
     private UserRepository repo;
 
-    private User user;
-
     @GetMapping
     public String viewPage() {
         return "index";
@@ -48,14 +46,12 @@ public class AppController {
     public String viewUsersList(Model model) {
         List<User> listUsers = repo.findAll();
         model.addAttribute("listUsers", listUsers);
-//        model.addAttribute("user", listUsers.get(0));
         model.addAttribute("users", listUsers);
 
         return "users";
     }
 
-
-    @PostMapping(value = "/unblock/{someID}")//NIKITA PIDOR
+    @PostMapping(value = "/unblock/{someID}")
     public String inBlock(@PathVariable(value = "someID") Long id, ModelMap map) {
         try {
             Optional<User> optionalUser = repo.findById(id);
@@ -68,10 +64,9 @@ public class AppController {
         return "redirect:/list_users";
     }
 
-    @PostMapping(value = "/block/{someID}")
+    @PostMapping(value = "list_users/block/{someID}")
     public String block(@PathVariable(value = "someID") Long id , ModelMap map) {
         try {
-            //todo get user from repo by id
             Optional<User> optionalUser = repo.findById(id);
             User user = optionalUser.isPresent() ? optionalUser.get() : new User();
             user.setStatus(Status.BLOCK);
@@ -82,6 +77,11 @@ public class AppController {
         return "redirect:/list_users";
     }
 
+    @DeleteMapping(value = "list_users/delete/{id}")
+    public String deleteCustomer(@PathVariable String id) {
+        repo.deleteById((long) Integer.parseInt(id));
+        return "redirect:/list_users";
+    }
 
     @PostMapping(value = "/delete/{someID}")
     public String delete(@PathVariable(value = "someID") String id, HttpServletRequest request, ModelMap map) {
@@ -93,5 +93,6 @@ public class AppController {
         }
         return "redirect:/list_users";
     }
+
 }
 
