@@ -83,16 +83,16 @@ public class AppController {
         return "redirect:/list_users";
     }
 
-    @PostMapping(value = "/delete/{someID}")
-    public String delete(@PathVariable(value = "someID") String id, HttpServletRequest request, ModelMap map) {
-        try {
-            repo.deleteById((long) Integer.parseInt(id));
-        } catch (Exception e) {
-            map.put("eror", e.getMessage());
-            map.put("listUsers", repo.findAll());
-        }
-        return "redirect:/list_users";
-    }
+//    @PostMapping(value = "/delete/{someID}")
+//    public String delete(@PathVariable(value = "someID") String id, HttpServletRequest request, ModelMap map) {
+//        try {
+//            repo.deleteById((long) Integer.parseInt(id));
+//        } catch (Exception e) {
+//            map.put("eror", e.getMessage());
+//            map.put("listUsers", repo.findAll());
+//        }
+//        return "redirect:/list_users";
+//    }
 
 }
 

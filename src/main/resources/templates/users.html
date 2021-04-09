@@ -43,7 +43,19 @@
 </div>
 <div>
 
-    <table class="table table-striped table-bordered">
+    <form th:action="@{|/block|}" th:method="delete" th:object="${user}" id="blockForm"></form>
+    <form th:action="@{|/unblock|}" th:method="delete" th:object="${user}" id="unblockForm"></form>
+    <form th:action="@{|/delete|}" th:method="delete" th:object="${user}" id="deleteForm">
+
+        <input type="submit" class="btn btn-primary" style="color:khaki" value="Delete" form="deleteForm"
+               onclick="return confirm('Are you sure? DELETE')"/>
+        <input type="submit" class="btn btn-primary" style="color:khaki" value="Block" form="blockForm"
+               onclick="return confirm('Are you sure? BLOCK')"/>
+        <input type="submit" class="btn btn-primary" style="color:khaki" value="Unblock" form="unblockForm"
+               onclick="return confirm('Are you sure? UNBLOCK')"/>
+
+
+        <table class="table table-striped table-bordered">
         <thead class="thead-dark">
         <tr>
             <th><input type="checkbox" class="check" id="checkBoxAll"/></th>
