@@ -43,15 +43,12 @@
 </div>
 <div>
 
-    <form th:action="@{|/block|}" th:method="delete" th:object="${user}" id="blockForm"></form>
-    <form th:action="@{|/unblock|}" th:method="delete" th:object="${user}" id="unblockForm"></form>
-    <form th:action="@{|/delete|}" th:method="delete" th:object="${user}" id="deleteForm">
 
-        <input type="submit" class="btn btn-primary" style="color:khaki" value="Delete" form="deleteForm"
+        <input type="submit" id="deleteButton" class="btn btn-primary" style="color:khaki" value="Delete"
                onclick="return confirm('Are you sure? DELETE')"/>
-        <input type="submit" class="btn btn-primary" style="color:khaki" value="Block" form="blockForm"
+        <input type="submit" id="blockButton" class="btn btn-primary" style="color:khaki" value="Block"
                onclick="return confirm('Are you sure? BLOCK')"/>
-        <input type="submit" class="btn btn-primary" style="color:khaki" value="Unblock" form="unblockForm"
+        <input type="submit" id="unblockButton" class="btn btn-primary" style="color:khaki" value="Unblock"
                onclick="return confirm('Are you sure? UNBLOCK')"/>
 
 
@@ -65,7 +62,6 @@
             <th>Last Name</th>
             <th>Status</th>
             <th>Date</th>
-            <th>Sign Up Date</th>
         </tr>
         </thead>
 
@@ -80,18 +76,10 @@
             <td th:text="${user.lastName}">Last Name</td>
             <td th:text="${user.status}">Status</td>
             <td th:text="${user.actualDate}">Date</td>
-            <td th:text="${user.singUpDate}">Sing Up Date</td>
-            <td><input id="blockBtn" th:value="${user.id}" class="btn btn-primary" style="color:khaki"
-                       type="button"  onclick="return confirm('Are you sure? BLOCK')">BLOCK</td>
-            <td><input id="deleteBtn" th:value="${user.id}" class="btn btn-primary" style="color:khaki"
-                       type="button"  onclick="return confirm('Are you sure? DELETE')">DELETE</td>
-            <td><input id="unblockBtn" th:value="${user.id}" class="btn btn-primary" style="color:khaki"
-                       type="button"  onclick="return confirm('Are you sure? UNBLOCK')">UNBLOCK</td>
         </tr>
         </tbody>
 
     </table>
-    </form>
 </div>
 
 </body>

@@ -27,10 +27,15 @@ public class User {
     private Status status = Status.UNBLOCK;
 
     @Column
-    private Date actualDate;
+    private String actualDate;
 
-    @Column
-    private Date singUpDate;
+    public void setActualDate(String actualDate) {
+        this.actualDate = actualDate;
+    }
+
+    public String getActualDate() {
+        return actualDate;
+    }
 
     public Long getId() {
         return id;
@@ -72,14 +77,6 @@ public class User {
         this.password = password;
     }
 
-    public Date getSingUpDate() {
-        return singUpDate;
-    }
-
-    public void setSingUpDate(Date singUpDate) {
-        this.singUpDate = singUpDate;
-    }
-
     public Status getStatus() {
         return status;
     }
@@ -88,11 +85,4 @@ public class User {
         this.status = status;
     }
 
-    public Date getActualDate() {
-        return actualDate;
-    }
-
-    public void setActualDate(Date actualDate) {
-        this.actualDate = actualDate;
-    }
 }

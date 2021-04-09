@@ -51,7 +51,7 @@ public class AppController {
         return "users";
     }
 
-    @PostMapping(value = "/unblock/{someID}")
+    @PostMapping(value = "unblock/{someID}")
     public String inBlock(@PathVariable(value = "someID") Long id, ModelMap map) {
         try {
             Optional<User> optionalUser = repo.findById(id);
@@ -61,11 +61,11 @@ public class AppController {
         } catch (Exception e) {
             map.put("error", e.getMessage());
         }
-        return "redirect:/list_users";
+        return "users";
     }
 
-    @PostMapping(value = "list_users/block/{someID}")
-    public String block(@PathVariable(value = "someID") Long id , ModelMap map) {
+    @PostMapping(value = "block/{someID}")
+    public void block(@PathVariable(value = "someID") Long id , ModelMap map) {
         try {
             Optional<User> optionalUser = repo.findById(id);
             User user = optionalUser.isPresent() ? optionalUser.get() : new User();
@@ -74,10 +74,10 @@ public class AppController {
         } catch (Exception e) {
             map.put("error", e.getMessage());
         }
-        return "redirect:/list_users";
+//        return "redirect:/list_users";
     }
 
-    @DeleteMapping(value = "list_users/delete/{id}")
+    @DeleteMapping(value = "delete/{id}")
     public String deleteCustomer(@PathVariable String id) {
         repo.deleteById((long) Integer.parseInt(id));
         return "redirect:/list_users";
