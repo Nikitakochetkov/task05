@@ -9,6 +9,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import javax.xml.crypto.Data;
+import java.util.Date;
 import java.util.Optional;
 
 public class CustomUserDetailsService implements UserDetailsService {
@@ -31,6 +33,8 @@ public class CustomUserDetailsService implements UserDetailsService {
                 if (user.getStatus() == Status.BLOCK)
                     return false;
                 else if (user.getStatus() == Status.UNBLOCK) {
+                    user.setSignUpDate(new Date());
+                    repo.save(user);
                     return true;
                 }
                 return super.isAccountNonLocked();

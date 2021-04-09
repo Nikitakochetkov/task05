@@ -29,6 +29,17 @@ public class User {
     @Column
     private String actualDate;
 
+    public Date getSignUpDate() {
+        return signUpDate;
+    }
+
+    public void setSignUpDate(Date signUpDate) {
+        this.signUpDate = signUpDate;
+    }
+
+    @Column
+    private Date signUpDate;
+
     public void setActualDate(String actualDate) {
         this.actualDate = actualDate;
     }
