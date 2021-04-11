@@ -66,7 +66,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                    @Override
 //                    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 //                                                        Authentication authentication) throws IOException, ServletException {
-//                        System.out.println("PIODR");
+//
 //                    }
 //                })
                 .and().cors().disable().csrf().disable()
